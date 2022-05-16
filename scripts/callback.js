@@ -92,7 +92,7 @@ css =
   '        .cback .phone-icon {\n' +
   '            width: 30px;\n' +
   '            height: 30px;\n' +
-  "            background: url('images/callback/phone.png') no-repeat;\n" +
+  "            background: url('https://kts.kz/images/callback/phone.png') no-repeat;\n" +
   '\t\t\tbackground-size: contain;\n' +
   '            position: absolute;\n' +
   '            top: 50%;\n' +
@@ -270,7 +270,7 @@ css =
   '\t\t\ttop: 2px;\n' +
   '\t\t\twidth: 15px;\n' +
   '\t\t\theight: 15px;\n' +
-  "\t\t\tbackground: url('images/callback/phone.png') no-repeat;\n" +
+  "\t\t\tbackground: url('https://kts.kz/images/callback/phone.png') no-repeat;\n" +
   '\t\t\tbackground-size: contain;\n' +
   '\t\t\ttransform: rotate(260deg);\n' +
   '\t\t}\n' +
