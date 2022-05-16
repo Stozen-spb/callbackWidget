@@ -459,13 +459,14 @@ css =
   '\t\t}\n' +
   '\t</style>'
 
-addScript('https://kts.kz/js/cleave.min.js')
-addScript('https://kts.kz/js/cleave-phone.i18n.js')
-
-function addScript(src) {
+function loadScript(url, callback) {
+  const head = document.head
   const script = document.createElement('script')
-  script.setAttribute('src', src)
   script.type = 'text/javascript'
+  script.src = url
+  script.onreadystatechange = callback
+  script.onload = callback
+  head.appendChild(script)
 }
 
 function localStorageParse(item, fallBack = null) {
@@ -656,13 +657,18 @@ class Controller {
   }
 }
 
-if (document.readyState !== 'loading') {
-  us_customDOMChanges()
-} else {
-  document.addEventListener('DOMContentLoaded', createCallbackWidget)
+function createCallbackWidget() {
+  const callbackWidget = new Controller()
+  callbackWidget.init()
 }
 
-function createCallbackWidget() {
-  const callback = new Controller()
-  callback.init()
+function init() {
+  const callback = loadScript('https://kts.kz/js/cleave-phone.i18n.js', createCallbackWidget)
+  loadScript('https://kts.kz/js/cleave.min.js', callback)
+}
+
+if (document.readyState !== 'loading') {
+  init()
+} else {
+  document.addEventListener('DOMContentLoaded', init())
 }
