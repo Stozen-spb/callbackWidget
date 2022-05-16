@@ -464,7 +464,7 @@ function loadScript(url, callback) {
   const script = document.createElement('script')
   script.type = 'text/javascript'
   script.src = url
-  script.setAttribute('async', 'false')
+  script.async = false
   head.appendChild(script)
   script.onreadystatechange = callback
   script.onload = callback
