@@ -3,7 +3,7 @@ function widget(env) {
     console.error('No callbackWidget env params!')
     return
   }
-  const callbackEnv = Object.assign(
+  const callBackEnv = Object.assign(
     {
       callbackEndpoint: 'https://ucp.kts.kz/api/public/pbx/rpc/callback',
       callbackRequestMethod: 'POST',
