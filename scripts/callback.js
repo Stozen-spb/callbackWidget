@@ -464,9 +464,9 @@ function loadScript(url, callback) {
   const script = document.createElement('script')
   script.type = 'text/javascript'
   script.src = url
+  head.appendChild(script)
   script.onreadystatechange = callback
   script.onload = callback
-  head.appendChild(script)
 }
 
 function localStorageParse(item, fallBack = null) {
