@@ -664,10 +664,10 @@ function createCallbackWidget() {
 }
 
 function init() {
-  loadScript(
-    'https://kts.kz/js/cleave.min.js',
+  const callback = () => {
     loadScript('https://kts.kz/js/cleave-phone.i18n.js', createCallbackWidget)
-  )
+  }
+  loadScript('https://kts.kz/js/cleave.min.js', callback)
 }
 
 if (document.readyState !== 'loading') {
