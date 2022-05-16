@@ -663,8 +663,10 @@ function createCallbackWidget() {
 }
 
 function init() {
-  const callback = loadScript('https://kts.kz/js/cleave-phone.i18n.js', createCallbackWidget)
-  loadScript('https://kts.kz/js/cleave.min.js', callback)
+  loadScript(
+    'https://kts.kz/js/cleave.min.js',
+    loadScript('https://kts.kz/js/cleave-phone.i18n.js', createCallbackWidget)
+  )
 }
 
 if (document.readyState !== 'loading') {
