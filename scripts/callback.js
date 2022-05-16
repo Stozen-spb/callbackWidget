@@ -1,9 +1,16 @@
 function widget(env) {
-  if (!env) {
+  if (!env || typeof env !== 'object') {
     console.error('No callbackWidget env params!')
     return
   }
-  const callbackEnv = env
+  const callbackEnv = Object.assign(
+    {
+      callbackEndpoint: 'https://ucp.kts.kz/api/public/pbx/rpc/callback',
+      callbackRequestMethod: 'POST',
+      callbackBlockingTime: 60, // second
+    },
+    env
+  )
   const html =
     '<div id="cback-wrap" class="cback">\n' +
     '\t\t<div id="cback-btn">\n' +
@@ -614,7 +621,7 @@ function widget(env) {
       xhr.send(
         JSON.stringify({
           phone: cleave.getRawValue().replace(/[^0-9]/g, ''),
-          unique_id: callBackEnv.callbackUniqueId,
+          unique_id: callBackEnv.Id,
         })
       )
       xhr.onload = function () {
