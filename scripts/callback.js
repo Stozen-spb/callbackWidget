@@ -480,10 +480,11 @@ function phoneCallBackWidget(env) {
       s.src = src
       s.async = true
       s.onerror = function (err) {
-        reject(err, s)
+        reject(err)
       }
+      // readyState == loaded or complete, in case of libraries use loaded
       s.onload = s.onreadystatechange = function () {
-        if (!r && (!this.readyState || this.readyState == 'complete')) {
+        if (!r && (!this.readyState || this.readyState == 'loaded')) {
           r = true
           resolve()
         }
