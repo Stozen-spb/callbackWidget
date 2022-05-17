@@ -1,4 +1,4 @@
-function phoneCallBackWidget(env) {
+function pbx_cb_w(env) {
   if (!env || typeof env !== 'object') {
     console.error('No callbackWidget env params!')
     return
@@ -483,7 +483,7 @@ function phoneCallBackWidget(env) {
       }
       // readyState == loaded or complete, in case of libraries use loaded
       s.onload = s.onreadystatechange = function () {
-        if (!r && (!this.readyState || this.readyState == 'loaded')) {
+        if (!r && (!this.readyState || this.readyState === 'loaded')) {
           r = true
           resolve()
         }
