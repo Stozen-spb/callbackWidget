@@ -1,4 +1,4 @@
-function widget(env) {
+function phoneCallBackWidget(env) {
   if (!env || typeof env !== 'object') {
     console.error('No callbackWidget env params!')
     return
@@ -472,15 +472,16 @@ function widget(env) {
     '\t\t}\n' +
     '\t</style>'
 
-  function loadScript(url, callback) {
-    const head = document.head
+  function loadScript(url) {
     const script = document.createElement('script')
     script.type = 'text/javascript'
     script.src = url
     script.async = false
-    head.appendChild(script)
-    script.onreadystatechange = callback
-    script.onload = callback
+    document.head.appendChild(script)
+    return new Promise((resolve) => {
+      script.onreadystatechange = resolve()
+      script.onload = resolve()
+    })
   }
 
   function localStorageParse(item, fallBack = null) {
@@ -621,7 +622,7 @@ function widget(env) {
       xhr.send(
         JSON.stringify({
           phone: cleave.getRawValue().replace(/[^0-9]/g, ''),
-          unique_id: callBackEnv.Id,
+          unique_id: callBackEnv.id,
         })
       )
       xhr.onload = function () {
@@ -676,16 +677,19 @@ function widget(env) {
     callbackWidget.init()
   }
 
-  function init() {
-    const callback = () => {
-      loadScript('https://kts.kz/js/cleave-phone.i18n.js', createCallbackWidget)
-    }
-    loadScript('https://kts.kz/js/cleave.min.js', callback)
+  function loadLibraries() {
+    loadScript('https://kts.kz/js/cleave.min.js')
+      .then(() => {
+        return loadScript('https://kts.kz/js/cleave-phone.i18n.js')
+      })
+      .then(() => {
+        createCallbackWidget()
+      })
   }
 
   if (document.readyState !== 'loading') {
-    init()
+    loadLibraries()
   } else {
-    document.addEventListener('DOMContentLoaded', init())
+    document.addEventListener('DOMContentLoaded', loadLibraries)
   }
 }
