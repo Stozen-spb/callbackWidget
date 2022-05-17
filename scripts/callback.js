@@ -478,7 +478,6 @@ function phoneCallBackWidget(env) {
       let r = false
       s.type = 'text/javascript'
       s.src = src
-      s.async = true
       s.onerror = function (err) {
         reject(err)
       }
